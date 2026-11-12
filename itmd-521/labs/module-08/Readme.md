@@ -1,4 +1,4 @@
-# MOdule 06
+# Module 06
 
 ## Objectives
 
