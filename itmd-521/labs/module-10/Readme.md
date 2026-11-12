@@ -19,7 +19,7 @@ Using the adjusted setup from Module-09, and based on your assigned dataset, you
 ## Assignment Setup Details
 
 * Read the assigned year value from the `itmd521` bucket into a single DataFrame
-* Clean the data with the given cleaning code in the example-code Jupytr Notebook
+* Clean the data with the given cleaning code in the example-code Jupyter Notebook
 * Write the contents of the DataFrame to your Minio bucket as a Parquet file
   * Create file name based on the english word representing the decade you are working with
 * Write the contents of the DataFrame to your own Database

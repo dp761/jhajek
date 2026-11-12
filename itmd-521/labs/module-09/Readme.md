@@ -24,7 +24,7 @@ conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:3.2.3')
 
 * Read the file: `20.txt` from the `itmd521` bucket and write it to your MySQL database to a table named: `twenty`
 ```python
-# Syntax to WRITE out dataframe to MySQL server from Module 7 assignment
+# Syntax to WRITE out DataFrame to MySQL server from Module 7 assignment
 # Replace "hajek" variable with your HAWKID, otherwise the database doesn't know where to create the table
 
 (splitDF.write.format("jdbc").option("url","jdbc:mysql://infra-database-vm0.service.consul:3306/hajek").option("driver","com.mysql.cj.jdbc.Driver").option("dbtable","twenty").option("user",mysqlaccesskey).option("password",mysqlsecretkey).save())
