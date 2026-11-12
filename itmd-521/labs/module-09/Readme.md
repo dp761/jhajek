@@ -1,45 +1,54 @@
-# Lab 07
+# Module 09
 
 ## Objectives
 
 - Integrate Pyspark source code with our cluster
-- Demonstrate the use of Jupytr Hub notebooks and our cluster
-- Discuss the ability to integrate JDBC based requests into a Big Data Cluster
+- Demonstrate the use of Jupyter Hub notebooks and our cluster
+- Demonstrate the usage of version control for the Spark cluster deployment of code
 - Demonstrate the usage of object storage with the Spark cluster integration 
 
 ## Assignment Setup
 
-* Using Jupytr Hub: adjust your `Internal IP for S3 cluster proxy` code to read:
-```python
-# Internal IP for S3 cluster proxy
-conf.set("spark.hadoop.fs.s3a.endpoint", "http://infra-minio-proxy-vm0.service.consul")
-```
+On our `spark-edge` class cluster server, `http://system22h030.itm.iit.edu`, connect via SSH and retrieve the contents of the `login.txt` file. In addition, create a new ssh keypair on the `http://system22h030.itm.iit.edu` server to clone your GitHub repo into your account.
 
-* Add Connector/J package to the `spark.jars.packages`
-```python
-conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:3.2.3')
-```
+Place the public portion of the new keypair in your GitHub repo. Create and configure a new `config` file (on the spark-edge server). Clone your provided private repo to the `spark-edge` server.
+
+See the tutorial documents:
+
+* [Jupyter Notebook Spark Tutorial](https://github.com/illinoistech-itm/jhajek/blob/master/itmd-521/JupyterHub/Readme.md "webpage for Jupyter Notebook Spark Tutorial")
+* [Jupyter Hub Running Spark Jobs](https://github.com/illinoistech-itm/jhajek/blob/master/itmd-521/JupyterHub/hub-tutorial.md#running-spark-jobs "webpage for Running Spark Jobs")
+* [Complete Jupyter Notebook Spark Cluster example](https://github.com/illinoistech-itm/jhajek/blob/master/itmd-521/JupyterHub/example-hub-applications.ipynb "webpage for complete demo of Notebook")
 
 ## Assignment Details
 
-* Read the file: `20.txt` from the `itmd521` bucket and write it to your MySQL database to a table named: `twenty`
-```python
-# Syntax to WRITE out DataFrame to MySQL server from Module 7 assignment
-# Replace "hajek" variable with your HAWKID, otherwise the database doesn't know where to create the table
+Using the sample code provided, you will begin the Data Engineering portion of the course. You will read the raw data sets listed below, process them with the provided code, and save them a `parquet` file, an `uncompressed csv`, and a `compressed csv` using `lz4`
 
-(splitDF.write.format("jdbc").option("url","jdbc:mysql://infra-database-vm0.service.consul:3306/hajek").option("driver","com.mysql.cj.jdbc.Driver").option("dbtable","twenty").option("user",mysqlaccesskey).option("password",mysqlsecretkey).save())
-```
+* 00.txt
+* 10.txt
+* 20.txt
+* 30.txt
+* 40.txt
+* 50.txt
+* 60.txt
+* 70.txt
+* 80.txt
+* 90.txt
 
-### Screenshot Required
+### Note
 
-Using this template, provide a screenshot of the execution of the `show tables;` command from your database on `system31.rice.iit.edu`
-
-**Place Screenshot here**
+Include additional code to parse records that are within the range of human livability for the AirTemperature Value. There is also an AirTemperature Quality Code (ATQualityCode) that should function as value checksum. 
 
 ### Deliverable
 
-Create a sub-folder named: `module-09` under the `itmd-521` folder. Push this deliverable with included screenshot there.
+Your code can be a single file with loops, but is recommended to split the work up into many smaller files.
+
+Make sure to update the value "Your App Name" to include your intials and the data set
+
+```java
+spark = SparkSession.builder.appName("Your App Name")\
+    .config('spark.driver.host','spark-edge.service.consul').config(conf=conf).getOrCreate()
+```
+
+Create a sub-folder under `labs` named:`module-09` under the `itmd-521` folder. Place all code deliverables there.
 
 Submit to Canvas the URL to the folder in your GitHub repo. 
-
-Due at the **Start of class** May 02nd 3:15 PM
